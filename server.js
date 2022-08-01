@@ -15,10 +15,10 @@ const rollbar = new Rollbar({
 
 rollbar.log('Hello world!')
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static('public'))
 
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname, '/public/index.html'))
+    res.sendFile(path.join(__dirname, './public/index.html'))
 })
 
 // /Users/zakariamahamed/Desktop/Devmountain/6Week/assessment-qa-devops/public/index.css
@@ -73,7 +73,8 @@ app.post('/api/duel', (req, res) => {
             rollbar.info("player lost.")
             res.status(200).send('You lost!')
         } else {
-            playerRecord.losses++
+            playerRecord.wins++
+            rollbar.info("player won.")
             res.status(200).send('You won!')
         }
     } catch (error) {

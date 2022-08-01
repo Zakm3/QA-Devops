@@ -1,4 +1,5 @@
 
+import { TestWatcher } from "jest"
 import { Builder, Capabilities, By } from "selenium-webdriver"
 
 require('chromedriver')
@@ -17,4 +18,14 @@ test('Title shows up when page loads', async () => {
     const title = await driver.findElement(By.id('title'))
     const displayed = await title.isDisplayed()
     expect(displayed).toBe(true)
+})
+
+test('id player duo appears when bot is added', async () => {
+    await driver.findElement(By.id('draw')).click;
+    await driver.sleep(1500)
+    await driver.findElement(By.css('.bot-btn')).click();
+    await driver.sleep(1500)
+    const duoDiv = await driver.findElement(By.id('player-duo'));
+
+    expect(duoDiv.isDisplayed()).toBeTruthy();
 })
